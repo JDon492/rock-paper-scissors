@@ -1,7 +1,10 @@
 let playerScore = document.querySelector(".user-result-score");
 let compScore = document.querySelector(".comp-result-score");
 let announcement = document.querySelector(".result-announcement")
-let winner = document.querySelector(".winner");
+let gameResult = document.querySelector(".gameResult");
+
+let scorePlayer = 0;
+let scoreComp = 0;
 
 const choices = ['Rock', 'Paper', 'Scissors'];
 
@@ -33,13 +36,21 @@ function workResult(user, comp) {
         announcement.innerText = "Tie!";
     } else if (user === "Rock" && comp === "Scissors" || user === "Paper" && comp === "Rock" || user === "Scissors" && comp === "Paper") {
         announcement.innerText = `You won! ${user} beats ${comp}!`;
-        playerScore.textContent ++;
+        playerScore.textContent = ++scorePlayer;
     } else if (comp === "Rock" && user === "Scissors" || comp === "Paper" && user === "Rock" || comp === "Scissors" && user === "Paper") {
         announcement.innerText = `You lost... ${comp} beats ${user}.`;
-        compScore.textContent ++;
+        compScore.textContent = ++scoreComp;
     }
-    
-    ifWinner();
+
+    //Winning & Losing
+
+    if (scorePlayer === 5) {
+        gameResult.textContent = "You're the first the 5! Congratulations!";
+        gameOver();
+    } else if (scoreComp === 5) {
+        gameResult.textContent = "Oh no! The computer got to 5. You lost.";
+        gameOver();
+    }
 };
 
 //Start a Round
@@ -49,10 +60,16 @@ function playRound (selection) {
     workResult(selection, compChoice);
 };
 
-//Winner & Loser
+//Game Over & Reset
 
-function ifWinner() {
-    if (Number(playerScore) === 5) {
-        winner.innerText = "You're the first the 5!\n Congratulations!";
-    } 
-}
+function gameOver() {
+    btns.forEach(btn => {
+        btn.setAttribute("disabled", "");
+        btn.setAttribute("style", "cursor:not-allowed");
+    });
+    const reset = document.createElement("button");
+        reset.classList.add("reset");
+        reset.setAttribute("onClick", "location.reload()");
+        reset.innerText = "Try Again?";
+        document.body.appendChild(reset);
+};
