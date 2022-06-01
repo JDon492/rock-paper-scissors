@@ -1,28 +1,58 @@
-let userScore = 0;
-let compScore = 0;
-let winner = '';
+let playerScore = document.querySelector(".user-result-score");
+let compScore = document.querySelector(".comp-result-score");
+let announcement = document.querySelector(".result-announcement")
+let winner = document.querySelector(".winner");
 
-const choices = ['rock', 'paper', 'scissors'];
+const choices = ['Rock', 'Paper', 'Scissors'];
 
-//Play a Round
-function compPlay(choice) {
-    let compSelection = choices[Math.floor(Math.random()*choices.length)];
-    let playerSelection = choice.toLowerCase();
-    
-    //Selections
+//Selections
 
-    if (playerSelection === compSelection) {
-        return "Draw!";
-    } else if (playerSelection === 'paper' && compSelection === 'rock' || playerSelection === 'scissors' && compSelection === 'paper' || playerSelection === 'rock' && compSelection === 'scissors') {
-        userScore ++;
-        return `You win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()} beats ${compSelection.charAt(0).toUpperCase() + compSelection.slice(1).toLowerCase()}.`;
-    } else if (compSelection === 'paper' && playerSelection === 'rock' || compSelection === 'scissors' && playerSelection === 'paper' || compSelection === 'rock' && playerSelection === 'scissors') {
-        compScore ++;
-        return  `You lost! ${compSelection.charAt(0).toUpperCase() + compSelection.slice(1).toLowerCase()} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()}.`;
+//Comp Selection
+
+function compSelection () {
+    let compChoice = choices[Math.floor(Math.random() * choices.length)];
+    return compChoice;
+};
+
+//Player Selection
+
+const btns = document.querySelectorAll("button");
+
+btns.forEach(btn => {
+    btn.addEventListener("click", event => {
+        let choice = (event.target.id);
+        playRound(choice);
+    });
+});
+
+//What selection beats what
+
+function workResult(user, comp) {
+
+    if (user === comp) {
+        announcement.innerText = "Tie!";
+    } else if (user === "Rock" && comp === "Scissors" || user === "Paper" && comp === "Rock" || user === "Scissors" && comp === "Paper") {
+        announcement.innerText = `You won! ${user} beats ${comp}!`;
+        playerScore.textContent ++;
+    } else if (comp === "Rock" && user === "Scissors" || comp === "Paper" && user === "Rock" || comp === "Scissors" && user === "Paper") {
+        announcement.innerText = `You lost... ${comp} beats ${user}.`;
+        compScore.textContent ++;
     }
+    
+    ifWinner();
+};
+
+//Start a Round
+
+function playRound (selection) {
+    const compChoice = compSelection();
+    workResult(selection, compChoice);
+};
+
+//Winner & Loser
+
+function ifWinner() {
+    if (Number(playerScore) === 5) {
+        winner.innerText = "You're the first the 5!\n Congratulations!";
+    } 
 }
-
-
-
-console.log(compPlay('rock'));
-console.log(compScore, userScore);

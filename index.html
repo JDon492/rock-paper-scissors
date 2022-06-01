@@ -4,13 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Rock, Paper, Scissors</title>
 </head>
 <body>
-    
+    <div class="title">
+        <h2>Rock, Paper, Scissors</h2>
+        <h5>First to 5, wins!</h5>
+    </div>
 
+    <div class="selection">
+        <button id = "Rock" >
+            <img src="./img/rock.png" alt="Rock">Rock</button>
+        <button id = "Paper">
+            <img src="./img/paper.png" alt="Paper">Paper</button>
+        <button id = "Scissors">
+            <img src="./img/scissors.png" alt="Scissors">Scissors</button>
+    </div>
 
+    <div class="results">
+        <div>You
+            <span class="result-score user-result-score">0</span>
+        </div>
+        <div>Computer
+            <span class="result-score comp-result-score">0</span>
+        </div>
+    </div>
 
+    <div class="result-announcement"></div>
+    <div class="winner"></div>
 
     <script src ="script.js"></script>
 </body>

@@ -1,0 +1,71 @@
+body {
+    font-family: 'Courier New';
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    background-color: rgba(13, 29, 59, 0.527);
+}
+
+.title {
+    text-align: center;
+}
+
+.selection {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: auto, 20px
+}
+
+h2 {
+    font-size: 60px;
+}
+
+h5 {
+    font-size: 25px;
+}
+
+button {
+    font-family: 'Courier New';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 18px;
+    background-color: rgb(210, 228, 54);
+    cursor: pointer;
+    transition: 75ms;
+}
+
+button:hover {
+    transform: scale(1.2)
+}
+
+#Rock img,
+#Paper img,
+#Scissors img {
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+}
+
+.results {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 100px;
+    font-size: 2rem;
+}
+
+.result-score {
+    font-size: 1.5rem;
+}
+
+.result-announcement, .winner {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
